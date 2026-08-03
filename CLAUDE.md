@@ -24,10 +24,11 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Six are installed. Four trigger on their own; two need to be asked for.
+Seven are installed. Six trigger on their own; one needs to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
+| `karpathy-guidelines` | multica-ai/andrej-karpathy-skills | automatic |
 | `scrutinize` | thananon/9arm-skills | automatic |
 | `frontend-design` | anthropics/skills | automatic |
 | `find-skills` | vercel-labs/skills | automatic |
