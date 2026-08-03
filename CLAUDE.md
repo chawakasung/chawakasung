@@ -24,7 +24,9 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Nine are installed. Eight trigger on their own; one needs to be asked for.
+Ten are installed. Nine trigger on their own; one needs to be asked for. All but
+`hof-manager` come from an external source and are tracked in `skills-lock.json`;
+`hof-manager` is written and maintained here.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -37,6 +39,7 @@ Nine are installed. Eight trigger on their own; one needs to be asked for.
 | `grill-with-docs` | mattpocock/skills | `/grill-with-docs` only — wraps the two above it |
 | `web-design-guidelines` | vercel-labs/agent-skills | automatic — UI/UX and accessibility review |
 | `writing-guidelines` | vercel-labs/agent-skills | automatic — prose, voice and tone review |
+| `hof-manager` | written in this repo | automatic — engagement work on halloffame.gallery |
 
 ### Installing more
 
