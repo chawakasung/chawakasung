@@ -24,7 +24,7 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Seven are installed. Six trigger on their own; one needs to be asked for.
+Nine are installed. Eight trigger on their own; one needs to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -35,6 +35,8 @@ Seven are installed. Six trigger on their own; one needs to be asked for.
 | `grilling` | mattpocock/skills | automatic |
 | `domain-modeling` | mattpocock/skills | automatic |
 | `grill-with-docs` | mattpocock/skills | `/grill-with-docs` only — wraps the two above it |
+| `web-design-guidelines` | vercel-labs/agent-skills | automatic — UI/UX and accessibility review |
+| `writing-guidelines` | vercel-labs/agent-skills | automatic — prose, voice and tone review |
 
 ### Installing more
 
@@ -64,6 +66,9 @@ publishing an Artifact, load `artifact-design` as the tooling requires, and use
 - `WebFetch` and `curl` to arbitrary hosts **fail**. Do not promise to download a file,
   scrape a page, or verify a link's contents.
 - npm registry and GitHub (via the git proxy) are reachable, so `npx skills add` works.
+  `raw.githubusercontent.com` answers too, which is what `web-design-guidelines` needs to
+  pull its rules. The skills.sh search API is not reachable — `npx skills find` returns
+  "No skills found" for everything, including known-good queries. Install by GitHub URL.
 
 Check `curl -sS "$HTTPS_PROXY/__agentproxy/status"` to see current policy denials before
 concluding something is broken. Never disable TLS verification or unset `HTTPS_PROXY`.
