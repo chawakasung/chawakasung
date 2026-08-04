@@ -24,11 +24,10 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Eight are installed. Seven trigger on their own; one needs to be asked for.
+Seven are installed. Six trigger on their own; one needs to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
-| `hall-of-fame-personas` | MrMaii/Hall-of-Fame-Studio | automatic |
 | `karpathy-guidelines` | multica-ai/andrej-karpathy-skills | automatic |
 | `scrutinize` | thananon/9arm-skills | automatic |
 | `frontend-design` | anthropics/skills | automatic |
@@ -48,22 +47,6 @@ npx skills add https://github.com/<owner>/<repo> --skill <name>
 
 Then read the skill's `SKILL.md` before relying on it (installed skills run with full
 agent permissions), and commit `.agents/`, `.claude/`, and `skills-lock.json` together.
-
-### hall-of-fame-personas
-
-The outlier of the set: 517 files, 3.3 MB, 40 historical-figure personas, and 24 Python
-scripts, with its `SKILL.md` and persona data written mostly in Chinese. It ranks personas
-against a task, plans a roundtable, and assembles role prompts.
-
-Its documented commands assume the skill sits at `skills/hall-of-fame-personas/` in its own
-repo. Here it lives at `.agents/skills/hall-of-fame-personas/`, so run the scripts with that
-directory as the working directory:
-
-```bash
-cd .agents/skills/hall-of-fame-personas && python3 scripts/persona_runtime.py list
-```
-
-Its `## App Integration` section refers to a React app that does not exist here — ignore it.
 
 ### Overlap to be aware of
 

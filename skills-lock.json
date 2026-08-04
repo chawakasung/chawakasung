@@ -31,12 +31,6 @@
       "skillPath": "skills/productivity/grilling/SKILL.md",
       "computedHash": "368d3dd7251247c69f3656d93dc83c8f1577792eacac2111f1e7981db2ece49b"
     },
-    "hall-of-fame-personas": {
-      "source": "MrMaii/Hall-of-Fame-Studio",
-      "sourceType": "github",
-      "skillPath": "skills/hall-of-fame-personas/SKILL.md",
-      "computedHash": "8b244e518d4742d355d8b5c4c953758b5b794c194ec77412e1574c8e092ccf9b"
-    },
     "karpathy-guidelines": {
       "source": "multica-ai/andrej-karpathy-skills",
       "sourceType": "github",
