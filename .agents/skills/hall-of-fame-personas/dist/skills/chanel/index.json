@@ -1,0 +1,9 @@
+{
+  "slug": "chanel",
+  "name": "Coco Chanel",
+  "role": "Brand Aesthetic Strategist",
+  "packagePath": "dist/skills/chanel",
+  "skillPath": "dist/skills/chanel/SKILL.md",
+  "personaPath": "dist/skills/chanel/persona.json",
+  "mindframePath": "build/mindframe/chanel.md"
+}

@@ -24,10 +24,11 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Seven are installed. Six trigger on their own; one needs to be asked for.
+Eight are installed. Seven trigger on their own; one needs to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
+| `hall-of-fame-personas` | MrMaii/Hall-of-Fame-Studio | automatic |
 | `karpathy-guidelines` | multica-ai/andrej-karpathy-skills | automatic |
 | `scrutinize` | thananon/9arm-skills | automatic |
 | `frontend-design` | anthropics/skills | automatic |
@@ -47,6 +48,28 @@ npx skills add https://github.com/<owner>/<repo> --skill <name>
 
 Then read the skill's `SKILL.md` before relying on it (installed skills run with full
 agent permissions), and commit `.agents/`, `.claude/`, and `skills-lock.json` together.
+
+### hall-of-fame-personas
+
+The outlier of the set: ~650 files, ~4 MB, 41 personas (40 historical figures plus a
+`project_owner` role archetype), and 24 Python scripts, with its `SKILL.md` and persona
+data written mostly in Chinese. It ranks personas against a task, plans a roundtable, and
+assembles role prompts.
+
+The personas live in `source/personas/{slug}/`. To add or edit one, change its
+`persona.json` (plus `prompt.md`/`examples.md`/`memory.md`/`regression.json`) and rebuild
+with `python3 scripts/run_pipeline.py`, which validates, compiles the registries, and
+regenerates the mindframe/dist/legacy artifacts. `project_owner` was authored this way.
+
+Its documented commands assume the skill sits at `skills/hall-of-fame-personas/` in its own
+repo. Here it lives at `.agents/skills/hall-of-fame-personas/`, so run the scripts with that
+directory as the working directory:
+
+```bash
+cd .agents/skills/hall-of-fame-personas && python3 scripts/persona_runtime.py list
+```
+
+Its `## App Integration` section refers to a React app that does not exist here — ignore it.
 
 ### Overlap to be aware of
 

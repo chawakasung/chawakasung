@@ -1,0 +1,9 @@
+{
+  "slug": "hopper_legacy",
+  "name": "Grace Hopper",
+  "role": "Software Modernization Commander",
+  "packagePath": "dist/skills/hopper_legacy",
+  "skillPath": "dist/skills/hopper_legacy/SKILL.md",
+  "personaPath": "dist/skills/hopper_legacy/persona.json",
+  "mindframePath": "build/mindframe/hopper_legacy.md"
+}

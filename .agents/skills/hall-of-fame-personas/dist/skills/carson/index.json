@@ -1,0 +1,9 @@
+{
+  "slug": "carson",
+  "name": "Rachel Carson",
+  "role": "Risk Foresight Analyst",
+  "packagePath": "dist/skills/carson",
+  "skillPath": "dist/skills/carson/SKILL.md",
+  "personaPath": "dist/skills/carson/persona.json",
+  "mindframePath": "build/mindframe/carson.md"
+}

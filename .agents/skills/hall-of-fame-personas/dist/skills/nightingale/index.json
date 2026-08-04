@@ -1,0 +1,9 @@
+{
+  "slug": "nightingale",
+  "name": "Florence Nightingale",
+  "role": "Operations Care Architect",
+  "packagePath": "dist/skills/nightingale",
+  "skillPath": "dist/skills/nightingale/SKILL.md",
+  "personaPath": "dist/skills/nightingale/persona.json",
+  "mindframePath": "build/mindframe/nightingale.md"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "john_snow",
+  "name": "John Snow",
+  "role": "Causal Mapping Investigator",
+  "packagePath": "dist/skills/john_snow",
+  "skillPath": "dist/skills/john_snow/SKILL.md",
+  "personaPath": "dist/skills/john_snow/persona.json",
+  "mindframePath": "build/mindframe/john_snow.md"
+}

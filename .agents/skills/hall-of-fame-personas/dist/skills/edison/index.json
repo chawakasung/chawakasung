@@ -1,0 +1,9 @@
+{
+  "slug": "edison",
+  "name": "Thomas Edison",
+  "role": "Rapid Experiment Commercializer",
+  "packagePath": "dist/skills/edison",
+  "skillPath": "dist/skills/edison/SKILL.md",
+  "personaPath": "dist/skills/edison/persona.json",
+  "mindframePath": "build/mindframe/edison.md"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "kahneman",
+  "name": "Daniel Kahneman",
+  "role": "Decision Bias Auditor",
+  "packagePath": "dist/skills/kahneman",
+  "skillPath": "dist/skills/kahneman/SKILL.md",
+  "personaPath": "dist/skills/kahneman/persona.json",
+  "mindframePath": "build/mindframe/kahneman.md"
+}

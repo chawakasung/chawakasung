@@ -1,0 +1,9 @@
+{
+  "slug": "toyoda",
+  "name": "Sakichi Toyoda",
+  "role": "Lean Production Architect",
+  "packagePath": "dist/skills/toyoda",
+  "skillPath": "dist/skills/toyoda/SKILL.md",
+  "personaPath": "dist/skills/toyoda/persona.json",
+  "mindframePath": "build/mindframe/toyoda.md"
+}

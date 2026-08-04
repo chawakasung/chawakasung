@@ -1,0 +1,9 @@
+{
+  "slug": "project_owner",
+  "name": "Project Owner",
+  "role": "项目负责人",
+  "packagePath": "dist/skills/project_owner",
+  "skillPath": "dist/skills/project_owner/SKILL.md",
+  "personaPath": "dist/skills/project_owner/persona.json",
+  "mindframePath": "build/mindframe/project_owner.md"
+}

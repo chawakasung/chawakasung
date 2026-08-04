@@ -1,0 +1,207 @@
+{
+  "musk": {
+    "name": "Elon Musk",
+    "role": "Chief Disruptor",
+    "skillPath": "dist/skills/musk/SKILL.md"
+  },
+  "buffett": {
+    "name": "Warren Buffett",
+    "role": "Capital Strategist",
+    "skillPath": "dist/skills/buffett/SKILL.md"
+  },
+  "curie": {
+    "name": "Marie Curie",
+    "role": "Deep Researcher",
+    "skillPath": "dist/skills/curie/SKILL.md"
+  },
+  "confucius": {
+    "name": "Confucius",
+    "role": "Ethos Architect",
+    "skillPath": "dist/skills/confucius/SKILL.md"
+  },
+  "turing": {
+    "name": "Alan Turing",
+    "role": "System Architect",
+    "skillPath": "dist/skills/turing/SKILL.md"
+  },
+  "jobs": {
+    "name": "Steve Jobs",
+    "role": "Product Visionary",
+    "skillPath": "dist/skills/jobs/SKILL.md"
+  },
+  "da_vinci": {
+    "name": "Leonardo da Vinci",
+    "role": "Cross-Disciplinary Inventor",
+    "skillPath": "dist/skills/da_vinci/SKILL.md"
+  },
+  "nightingale": {
+    "name": "Florence Nightingale",
+    "role": "Operations Care Architect",
+    "skillPath": "dist/skills/nightingale/SKILL.md"
+  },
+  "sun_tzu": {
+    "name": "Sun Tzu",
+    "role": "Strategic Planner",
+    "skillPath": "dist/skills/sun_tzu/SKILL.md"
+  },
+  "kahneman": {
+    "name": "Daniel Kahneman",
+    "role": "Decision Bias Auditor",
+    "skillPath": "dist/skills/kahneman/SKILL.md"
+  },
+  "ada_lovelace": {
+    "name": "Ada Lovelace",
+    "role": "Computational Product Designer",
+    "skillPath": "dist/skills/ada_lovelace/SKILL.md"
+  },
+  "mandela": {
+    "name": "Nelson Mandela",
+    "role": "Reconciliation Leader",
+    "skillPath": "dist/skills/mandela/SKILL.md"
+  },
+  "goodall": {
+    "name": "Jane Goodall",
+    "role": "Field Insight Researcher",
+    "skillPath": "dist/skills/goodall/SKILL.md"
+  },
+  "einstein": {
+    "name": "Albert Einstein",
+    "role": "Fundamental Theory Simplifier",
+    "skillPath": "dist/skills/einstein/SKILL.md"
+  },
+  "drucker": {
+    "name": "Peter Drucker",
+    "role": "Management Systems Designer",
+    "skillPath": "dist/skills/drucker/SKILL.md"
+  },
+  "shannon": {
+    "name": "Claude Shannon",
+    "role": "Information Systems Optimizer",
+    "skillPath": "dist/skills/shannon/SKILL.md"
+  },
+  "toyoda": {
+    "name": "Sakichi Toyoda",
+    "role": "Lean Production Architect",
+    "skillPath": "dist/skills/toyoda/SKILL.md"
+  },
+  "oprah": {
+    "name": "Oprah Winfrey",
+    "role": "Empathy Communication Strategist",
+    "skillPath": "dist/skills/oprah/SKILL.md"
+  },
+  "tesla": {
+    "name": "Nikola Tesla",
+    "role": "Deep Tech Systems Futurist",
+    "skillPath": "dist/skills/tesla/SKILL.md"
+  },
+  "feynman": {
+    "name": "Richard Feynman",
+    "role": "Explainability Debug Mentor",
+    "skillPath": "dist/skills/feynman/SKILL.md"
+  },
+  "deming": {
+    "name": "W. Edwards Deming",
+    "role": "Statistical Quality Strategist",
+    "skillPath": "dist/skills/deming/SKILL.md"
+  },
+  "hopper_legacy": {
+    "name": "Grace Hopper",
+    "role": "Software Modernization Commander",
+    "skillPath": "dist/skills/hopper_legacy/SKILL.md"
+  },
+  "carson": {
+    "name": "Rachel Carson",
+    "role": "Risk Foresight Analyst",
+    "skillPath": "dist/skills/carson/SKILL.md"
+  },
+  "carnegie": {
+    "name": "Dale Carnegie",
+    "role": "Influence and Negotiation Coach",
+    "skillPath": "dist/skills/carnegie/SKILL.md"
+  },
+  "berners_lee": {
+    "name": "Tim Berners-Lee",
+    "role": "Open Protocol Ecosystem Architect",
+    "skillPath": "dist/skills/berners_lee/SKILL.md"
+  },
+  "noether": {
+    "name": "Emmy Noether",
+    "role": "Structural Invariant Analyst",
+    "skillPath": "dist/skills/noether/SKILL.md"
+  },
+  "simon": {
+    "name": "Herbert A. Simon",
+    "role": "Decision Process Engineer",
+    "skillPath": "dist/skills/simon/SKILL.md"
+  },
+  "ostrom": {
+    "name": "Elinor Ostrom",
+    "role": "Collective Governance Designer",
+    "skillPath": "dist/skills/ostrom/SKILL.md"
+  },
+  "john_snow": {
+    "name": "John Snow",
+    "role": "Causal Mapping Investigator",
+    "skillPath": "dist/skills/john_snow/SKILL.md"
+  },
+  "chanel": {
+    "name": "Coco Chanel",
+    "role": "Brand Aesthetic Strategist",
+    "skillPath": "dist/skills/chanel/SKILL.md"
+  },
+  "aristotle": {
+    "name": "Aristotle",
+    "role": "Logic and Taxonomy Architect",
+    "skillPath": "dist/skills/aristotle/SKILL.md"
+  },
+  "lincoln": {
+    "name": "Abraham Lincoln",
+    "role": "Crisis Unity Leader",
+    "skillPath": "dist/skills/lincoln/SKILL.md"
+  },
+  "von_neumann": {
+    "name": "John von Neumann",
+    "role": "Game Theory Systems Strategist",
+    "skillPath": "dist/skills/von_neumann/SKILL.md"
+  },
+  "edison": {
+    "name": "Thomas Edison",
+    "role": "Rapid Experiment Commercializer",
+    "skillPath": "dist/skills/edison/SKILL.md"
+  },
+  "wangari_maathai": {
+    "name": "Wangari Maathai",
+    "role": "Sustainable Mobilization Leader",
+    "skillPath": "dist/skills/wangari_maathai/SKILL.md"
+  },
+  "nash": {
+    "name": "John Nash",
+    "role": "Equilibrium Negotiation Modeler",
+    "skillPath": "dist/skills/nash/SKILL.md"
+  },
+  "amelia_earhart": {
+    "name": "Amelia Earhart",
+    "role": "Frontier Mission Pathfinder",
+    "skillPath": "dist/skills/amelia_earhart/SKILL.md"
+  },
+  "ibn_khaldun": {
+    "name": "Ibn Khaldun",
+    "role": "Civilizational Trend Analyst",
+    "skillPath": "dist/skills/ibn_khaldun/SKILL.md"
+  },
+  "babbage": {
+    "name": "Charles Babbage",
+    "role": "Mechanized Workflow Architect",
+    "skillPath": "dist/skills/babbage/SKILL.md"
+  },
+  "ramanujan": {
+    "name": "Srinivasa Ramanujan",
+    "role": "Numerical Pattern Insight Specialist",
+    "skillPath": "dist/skills/ramanujan/SKILL.md"
+  },
+  "project_owner": {
+    "name": "Project Owner",
+    "role": "项目负责人",
+    "skillPath": "dist/skills/project_owner/SKILL.md"
+  }
+}

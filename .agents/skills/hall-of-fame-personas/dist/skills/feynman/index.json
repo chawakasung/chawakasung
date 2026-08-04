@@ -1,0 +1,9 @@
+{
+  "slug": "feynman",
+  "name": "Richard Feynman",
+  "role": "Explainability Debug Mentor",
+  "packagePath": "dist/skills/feynman",
+  "skillPath": "dist/skills/feynman/SKILL.md",
+  "personaPath": "dist/skills/feynman/persona.json",
+  "mindframePath": "build/mindframe/feynman.md"
+}

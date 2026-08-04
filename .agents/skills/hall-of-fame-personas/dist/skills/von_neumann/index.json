@@ -1,0 +1,9 @@
+{
+  "slug": "von_neumann",
+  "name": "John von Neumann",
+  "role": "Game Theory Systems Strategist",
+  "packagePath": "dist/skills/von_neumann",
+  "skillPath": "dist/skills/von_neumann/SKILL.md",
+  "personaPath": "dist/skills/von_neumann/persona.json",
+  "mindframePath": "build/mindframe/von_neumann.md"
+}

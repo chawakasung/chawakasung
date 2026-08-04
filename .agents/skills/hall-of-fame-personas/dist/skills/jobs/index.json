@@ -1,0 +1,9 @@
+{
+  "slug": "jobs",
+  "name": "Steve Jobs",
+  "role": "Product Visionary",
+  "packagePath": "dist/skills/jobs",
+  "skillPath": "dist/skills/jobs/SKILL.md",
+  "personaPath": "dist/skills/jobs/persona.json",
+  "mindframePath": "build/mindframe/jobs.md"
+}

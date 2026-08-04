@@ -1,0 +1,9 @@
+{
+  "slug": "confucius",
+  "name": "Confucius",
+  "role": "Ethos Architect",
+  "packagePath": "dist/skills/confucius",
+  "skillPath": "dist/skills/confucius/SKILL.md",
+  "personaPath": "dist/skills/confucius/persona.json",
+  "mindframePath": "build/mindframe/confucius.md"
+}

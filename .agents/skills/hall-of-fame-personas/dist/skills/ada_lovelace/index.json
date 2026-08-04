@@ -1,0 +1,9 @@
+{
+  "slug": "ada_lovelace",
+  "name": "Ada Lovelace",
+  "role": "Computational Product Designer",
+  "packagePath": "dist/skills/ada_lovelace",
+  "skillPath": "dist/skills/ada_lovelace/SKILL.md",
+  "personaPath": "dist/skills/ada_lovelace/persona.json",
+  "mindframePath": "build/mindframe/ada_lovelace.md"
+}

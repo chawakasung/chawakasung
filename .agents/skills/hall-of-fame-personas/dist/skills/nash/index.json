@@ -1,0 +1,9 @@
+{
+  "slug": "nash",
+  "name": "John Nash",
+  "role": "Equilibrium Negotiation Modeler",
+  "packagePath": "dist/skills/nash",
+  "skillPath": "dist/skills/nash/SKILL.md",
+  "personaPath": "dist/skills/nash/persona.json",
+  "mindframePath": "build/mindframe/nash.md"
+}

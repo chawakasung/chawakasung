@@ -1,0 +1,9 @@
+{
+  "slug": "sun_tzu",
+  "name": "Sun Tzu",
+  "role": "Strategic Planner",
+  "packagePath": "dist/skills/sun_tzu",
+  "skillPath": "dist/skills/sun_tzu/SKILL.md",
+  "personaPath": "dist/skills/sun_tzu/persona.json",
+  "mindframePath": "build/mindframe/sun_tzu.md"
+}

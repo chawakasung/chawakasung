@@ -1,0 +1,9 @@
+{
+  "slug": "lincoln",
+  "name": "Abraham Lincoln",
+  "role": "Crisis Unity Leader",
+  "packagePath": "dist/skills/lincoln",
+  "skillPath": "dist/skills/lincoln/SKILL.md",
+  "personaPath": "dist/skills/lincoln/persona.json",
+  "mindframePath": "build/mindframe/lincoln.md"
+}

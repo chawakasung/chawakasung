@@ -1,0 +1,9 @@
+{
+  "slug": "babbage",
+  "name": "Charles Babbage",
+  "role": "Mechanized Workflow Architect",
+  "packagePath": "dist/skills/babbage",
+  "skillPath": "dist/skills/babbage/SKILL.md",
+  "personaPath": "dist/skills/babbage/persona.json",
+  "mindframePath": "build/mindframe/babbage.md"
+}

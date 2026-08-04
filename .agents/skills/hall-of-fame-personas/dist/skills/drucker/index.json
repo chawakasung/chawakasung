@@ -1,0 +1,9 @@
+{
+  "slug": "drucker",
+  "name": "Peter Drucker",
+  "role": "Management Systems Designer",
+  "packagePath": "dist/skills/drucker",
+  "skillPath": "dist/skills/drucker/SKILL.md",
+  "personaPath": "dist/skills/drucker/persona.json",
+  "mindframePath": "build/mindframe/drucker.md"
+}

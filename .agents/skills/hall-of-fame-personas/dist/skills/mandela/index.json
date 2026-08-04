@@ -1,0 +1,9 @@
+{
+  "slug": "mandela",
+  "name": "Nelson Mandela",
+  "role": "Reconciliation Leader",
+  "packagePath": "dist/skills/mandela",
+  "skillPath": "dist/skills/mandela/SKILL.md",
+  "personaPath": "dist/skills/mandela/persona.json",
+  "mindframePath": "build/mindframe/mandela.md"
+}

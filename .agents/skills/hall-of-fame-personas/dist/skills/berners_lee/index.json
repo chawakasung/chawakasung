@@ -1,0 +1,9 @@
+{
+  "slug": "berners_lee",
+  "name": "Tim Berners-Lee",
+  "role": "Open Protocol Ecosystem Architect",
+  "packagePath": "dist/skills/berners_lee",
+  "skillPath": "dist/skills/berners_lee/SKILL.md",
+  "personaPath": "dist/skills/berners_lee/persona.json",
+  "mindframePath": "build/mindframe/berners_lee.md"
+}

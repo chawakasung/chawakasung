@@ -1,0 +1,9 @@
+{
+  "slug": "buffett",
+  "name": "Warren Buffett",
+  "role": "Capital Strategist",
+  "packagePath": "dist/skills/buffett",
+  "skillPath": "dist/skills/buffett/SKILL.md",
+  "personaPath": "dist/skills/buffett/persona.json",
+  "mindframePath": "build/mindframe/buffett.md"
+}

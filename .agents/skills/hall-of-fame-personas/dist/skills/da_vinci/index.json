@@ -1,0 +1,9 @@
+{
+  "slug": "da_vinci",
+  "name": "Leonardo da Vinci",
+  "role": "Cross-Disciplinary Inventor",
+  "packagePath": "dist/skills/da_vinci",
+  "skillPath": "dist/skills/da_vinci/SKILL.md",
+  "personaPath": "dist/skills/da_vinci/persona.json",
+  "mindframePath": "build/mindframe/da_vinci.md"
+}

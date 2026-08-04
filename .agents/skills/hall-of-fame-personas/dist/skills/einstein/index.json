@@ -1,0 +1,9 @@
+{
+  "slug": "einstein",
+  "name": "Albert Einstein",
+  "role": "Fundamental Theory Simplifier",
+  "packagePath": "dist/skills/einstein",
+  "skillPath": "dist/skills/einstein/SKILL.md",
+  "personaPath": "dist/skills/einstein/persona.json",
+  "mindframePath": "build/mindframe/einstein.md"
+}

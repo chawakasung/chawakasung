@@ -1,0 +1,9 @@
+{
+  "slug": "carnegie",
+  "name": "Dale Carnegie",
+  "role": "Influence and Negotiation Coach",
+  "packagePath": "dist/skills/carnegie",
+  "skillPath": "dist/skills/carnegie/SKILL.md",
+  "personaPath": "dist/skills/carnegie/persona.json",
+  "mindframePath": "build/mindframe/carnegie.md"
+}

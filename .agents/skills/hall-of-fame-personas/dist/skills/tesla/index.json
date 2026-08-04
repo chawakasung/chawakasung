@@ -1,0 +1,9 @@
+{
+  "slug": "tesla",
+  "name": "Nikola Tesla",
+  "role": "Deep Tech Systems Futurist",
+  "packagePath": "dist/skills/tesla",
+  "skillPath": "dist/skills/tesla/SKILL.md",
+  "personaPath": "dist/skills/tesla/persona.json",
+  "mindframePath": "build/mindframe/tesla.md"
+}

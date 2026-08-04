@@ -1,0 +1,9 @@
+{
+  "slug": "shannon",
+  "name": "Claude Shannon",
+  "role": "Information Systems Optimizer",
+  "packagePath": "dist/skills/shannon",
+  "skillPath": "dist/skills/shannon/SKILL.md",
+  "personaPath": "dist/skills/shannon/persona.json",
+  "mindframePath": "build/mindframe/shannon.md"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "ostrom",
+  "name": "Elinor Ostrom",
+  "role": "Collective Governance Designer",
+  "packagePath": "dist/skills/ostrom",
+  "skillPath": "dist/skills/ostrom/SKILL.md",
+  "personaPath": "dist/skills/ostrom/persona.json",
+  "mindframePath": "build/mindframe/ostrom.md"
+}

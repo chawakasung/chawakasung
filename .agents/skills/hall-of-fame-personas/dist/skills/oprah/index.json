@@ -1,0 +1,9 @@
+{
+  "slug": "oprah",
+  "name": "Oprah Winfrey",
+  "role": "Empathy Communication Strategist",
+  "packagePath": "dist/skills/oprah",
+  "skillPath": "dist/skills/oprah/SKILL.md",
+  "personaPath": "dist/skills/oprah/persona.json",
+  "mindframePath": "build/mindframe/oprah.md"
+}

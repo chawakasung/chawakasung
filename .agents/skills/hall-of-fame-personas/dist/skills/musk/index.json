@@ -1,0 +1,9 @@
+{
+  "slug": "musk",
+  "name": "Elon Musk",
+  "role": "Chief Disruptor",
+  "packagePath": "dist/skills/musk",
+  "skillPath": "dist/skills/musk/SKILL.md",
+  "personaPath": "dist/skills/musk/persona.json",
+  "mindframePath": "build/mindframe/musk.md"
+}

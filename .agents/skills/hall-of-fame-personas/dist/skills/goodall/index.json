@@ -1,0 +1,9 @@
+{
+  "slug": "goodall",
+  "name": "Jane Goodall",
+  "role": "Field Insight Researcher",
+  "packagePath": "dist/skills/goodall",
+  "skillPath": "dist/skills/goodall/SKILL.md",
+  "personaPath": "dist/skills/goodall/persona.json",
+  "mindframePath": "build/mindframe/goodall.md"
+}

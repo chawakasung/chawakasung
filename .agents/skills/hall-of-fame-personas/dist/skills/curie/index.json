@@ -1,0 +1,9 @@
+{
+  "slug": "curie",
+  "name": "Marie Curie",
+  "role": "Deep Researcher",
+  "packagePath": "dist/skills/curie",
+  "skillPath": "dist/skills/curie/SKILL.md",
+  "personaPath": "dist/skills/curie/persona.json",
+  "mindframePath": "build/mindframe/curie.md"
+}

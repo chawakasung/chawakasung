@@ -1,0 +1,9 @@
+{
+  "slug": "ibn_khaldun",
+  "name": "Ibn Khaldun",
+  "role": "Civilizational Trend Analyst",
+  "packagePath": "dist/skills/ibn_khaldun",
+  "skillPath": "dist/skills/ibn_khaldun/SKILL.md",
+  "personaPath": "dist/skills/ibn_khaldun/persona.json",
+  "mindframePath": "build/mindframe/ibn_khaldun.md"
+}

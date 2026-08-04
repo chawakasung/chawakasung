@@ -1,0 +1,9 @@
+{
+  "slug": "turing",
+  "name": "Alan Turing",
+  "role": "System Architect",
+  "packagePath": "dist/skills/turing",
+  "skillPath": "dist/skills/turing/SKILL.md",
+  "personaPath": "dist/skills/turing/persona.json",
+  "mindframePath": "build/mindframe/turing.md"
+}

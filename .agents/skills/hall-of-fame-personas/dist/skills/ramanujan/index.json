@@ -1,0 +1,9 @@
+{
+  "slug": "ramanujan",
+  "name": "Srinivasa Ramanujan",
+  "role": "Numerical Pattern Insight Specialist",
+  "packagePath": "dist/skills/ramanujan",
+  "skillPath": "dist/skills/ramanujan/SKILL.md",
+  "personaPath": "dist/skills/ramanujan/persona.json",
+  "mindframePath": "build/mindframe/ramanujan.md"
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "wangari_maathai",
+  "name": "Wangari Maathai",
+  "role": "Sustainable Mobilization Leader",
+  "packagePath": "dist/skills/wangari_maathai",
+  "skillPath": "dist/skills/wangari_maathai/SKILL.md",
+  "personaPath": "dist/skills/wangari_maathai/persona.json",
+  "mindframePath": "build/mindframe/wangari_maathai.md"
+}

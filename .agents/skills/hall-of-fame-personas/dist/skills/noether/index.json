@@ -1,0 +1,9 @@
+{
+  "slug": "noether",
+  "name": "Emmy Noether",
+  "role": "Structural Invariant Analyst",
+  "packagePath": "dist/skills/noether",
+  "skillPath": "dist/skills/noether/SKILL.md",
+  "personaPath": "dist/skills/noether/persona.json",
+  "mindframePath": "build/mindframe/noether.md"
+}

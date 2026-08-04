@@ -1,0 +1,9 @@
+{
+  "slug": "aristotle",
+  "name": "Aristotle",
+  "role": "Logic and Taxonomy Architect",
+  "packagePath": "dist/skills/aristotle",
+  "skillPath": "dist/skills/aristotle/SKILL.md",
+  "personaPath": "dist/skills/aristotle/persona.json",
+  "mindframePath": "build/mindframe/aristotle.md"
+}

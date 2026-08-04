@@ -1,0 +1,9 @@
+{
+  "slug": "amelia_earhart",
+  "name": "Amelia Earhart",
+  "role": "Frontier Mission Pathfinder",
+  "packagePath": "dist/skills/amelia_earhart",
+  "skillPath": "dist/skills/amelia_earhart/SKILL.md",
+  "personaPath": "dist/skills/amelia_earhart/persona.json",
+  "mindframePath": "build/mindframe/amelia_earhart.md"
+}

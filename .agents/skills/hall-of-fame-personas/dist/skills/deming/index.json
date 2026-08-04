@@ -1,0 +1,9 @@
+{
+  "slug": "deming",
+  "name": "W. Edwards Deming",
+  "role": "Statistical Quality Strategist",
+  "packagePath": "dist/skills/deming",
+  "skillPath": "dist/skills/deming/SKILL.md",
+  "personaPath": "dist/skills/deming/persona.json",
+  "mindframePath": "build/mindframe/deming.md"
+}

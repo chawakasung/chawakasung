@@ -1,0 +1,9 @@
+{
+  "slug": "simon",
+  "name": "Herbert A. Simon",
+  "role": "Decision Process Engineer",
+  "packagePath": "dist/skills/simon",
+  "skillPath": "dist/skills/simon/SKILL.md",
+  "personaPath": "dist/skills/simon/persona.json",
+  "mindframePath": "build/mindframe/simon.md"
+}
