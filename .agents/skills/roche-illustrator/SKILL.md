@@ -213,6 +213,40 @@ claiming to have read a blocked Roche site.
 
 ---
 
+## Composing infographics from the library (learned the hard way)
+
+Building a multi-card layout from official figures surfaced failure modes worth pinning down:
+
+1. **Match a brief by picking the nearest official pose — do not hand-draw the exact one.**
+   The library will not contain every pose a reference shows (no "rising from a chair with
+   both arms up", no side-bend, no massage chair). Hand-drawing to match costs many rounds
+   and never reaches the library's quality. Choose the closest official pose whose *meaning*
+   fits the caption; it beats a bespoke figure that reads as off-brand. Only draw a prop the
+   library truly lacks (see `scripts/example_draw_object.py`), and expect it to look weaker.
+
+2. **Check every garment/hair fill against the surface it sits on — this bit four times.**
+   A cream coat on a cream card, navy hair on a navy headrest, an orange leg-rest on the
+   orange card: the shape vanishes and you get floating hands/heads. Before choosing a
+   figure or a background, diff the two palettes; if a large fill matches the panel, pick a
+   different figure or shift the panel.
+
+3. **Embedded `get_svg_image()` ignores `clipPath` and the viewBox.** Shapes outside the
+   artboard (a parked wheelchair beside a sofa) still render when inlined. You cannot clip
+   them away downstream — **remove them at source** with
+   `page.add_redact_annot(zone)` + `page.apply_redactions(graphics=1)` (contained-only) before
+   `get_svg_image()`. `graphics=2` (intersect) also deletes shapes that merely *touch* the
+   zone, so a monitor bezel crossing the crop line takes the chair with it — prefer
+   `graphics=1`, or redact in several tight passes.
+
+4. **`set_cropbox` throws `CropBox not in MediaBox`** when the drawings' bbox spills past the
+   artboard — clamp it: `bb = bb & page.rect`.
+
+5. **Know when to stop.** If three consecutive edits are per-pixel pose fixes, the answer is
+   a *decision* (which official pose, or draw-vs-not), not another tweak. Put the fork to the
+   user rather than iterating.
+
+---
+
 ## Decision rules
 
 | Scenario | Do |

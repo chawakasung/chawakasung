@@ -1,50 +1,66 @@
-def massage_chair(ox, oy, h):
-    """Flat brand-style recliner massage chair, side view, seat facing left."""
-    s = h / 150.0
-    def pts(v):
-        return " ".join(f"{ox+a*s:.1f},{oy+b*s:.1f}" for a, b in v)
-    def d(cmds):
-        out = []
-        for c in cmds:
-            out.append(c if isinstance(c, str) else f"{ox+c[0]*s:.1f} {oy+c[1]*s:.1f}")
-        return " ".join(out)
+NAVY, SKY, ORANGE, CREAM, SKIN = "#022366", "#BDE3FF", "#FF7D29", "#FFF7F5", "#F4C9A0"
+MIDBLUE, VIOLET, HAIR = "#1482FA", "#BC36F0", "#7A3620"
 
-    SHELL, PAD, DEEP, NAVY = "#BDE3FF", "#FF7D29", "#B22B0D", "#022366"
+def massage_chair(ox, oy, h):
+    """Woman relaxing in a massage chair — flat side view facing left.
+    Shell in sky, cushions in midblue, navy headrest/base, violet leggings."""
+    s = h / 175.0
+    def P(v): return " ".join(f"{ox+a*s:.1f},{oy+b*s:.1f}" for a, b in v)
+    def D(c): return " ".join(t if isinstance(t, str) else f"{ox+t[0]*s:.1f} {oy+t[1]*s:.1f}" for t in c)
+    def poly(v, f): return f'<polygon points="{P(v)}" fill="{f}"/>'
+    def path(c, f): return f'<path d="{D(c)}" fill="{f}"/>'
+    def band(p1, p2, w):
+        (x1,y1),(x2,y2) = p1,p2
+        dx,dy = x2-x1, y2-y1
+        L = (dx*dx+dy*dy)**0.5 or 1
+        nx,ny = -dy/L*w/2, dx/L*w/2
+        return [(x1+nx,y1+ny),(x1-nx,y1-ny),(x2-nx,y2-ny),(x2+nx,y2+ny)]
+    def circle(c, r, f):
+        return f'<circle cx="{ox+c[0]*s:.1f}" cy="{oy+c[1]*s:.1f}" r="{r*s:.1f}" fill="{f}"/>'
+
     p = ['<g id="massage-chair">']
 
-    # base + pedestal
-    p.append(f'<polygon points="{pts([(56,134),(142,134),(134,148),(48,148)])}" fill="{NAVY}"/>')
-    p.append(f'<polygon points="{pts([(84,112),(118,112),(124,134),(78,134)])}" fill="{NAVY}"/>')
+    # shell: tall rounded backrest, slight recline
+    p.append(path(["M",(114,122),"L",(128,30),"Q",(130,14),(146,14),
+                   "Q",(164,14),(165,32),"L",(163,122),"Z"], SKY))
+    # headrest pillow
+    p.append(poly([(130,30),(158,32),(156,58),(128,56)], NAVY))
+    # accent stripe on the shell edge
+    p.append(poly([(156,62),(163,62),(161,118),(154,118)], ORANGE))
+    # seat cushion
+    p.append(poly([(64,104),(130,104),(132,124),(62,124)], MIDBLUE))
+    # attached leg rest + pad
+    p.append(poly(band((62,110),(34,142), 30), SKY))
+    p.append(poly(band((60,110),(37,138), 16), MIDBLUE))
+    # rear support + base skid
+    p.append(poly([(146,122),(163,122),(168,150),(151,150)], NAVY))
+    p.append(path(["M",(64,150),"Q",(56,150),(56,155),"Q",(56,160),(64,160),
+                   "L",(168,160),"Q",(176,160),(176,155),"Q",(176,150),(168,150),"Z"], NAVY))
 
-    # outer shell: reclined back column + seat ledge
-    # seat shell (stays level)
-    seat_shell = ["M",(58,88),"L",(120,88),"Q",(146,88),(146,110),"Q",(146,116),(126,116),
-                  "L",(58,116),"Z"]
-    p.append(f'<path d="{d(seat_shell)}" fill="{SHELL}"/>')
-    # reclined back assembly
-    px, py = ox + 108*s, oy + 104*s
-    p.append(f'<g transform="rotate(-14 {px:.1f} {py:.1f})">')
-    back_shell = ["M",(96,104),"L",(96,34),"Q",(96,10),(121,10),"Q",(146,10),(146,34),
-                  "L",(146,104),"Z"]
-    p.append(f'<path d="{d(back_shell)}" fill="{SHELL}"/>')
+    # ---- woman ----
+    HIP=(104,100); KNEE=(72,90); ANKLE=(52,124); SHOULDER=(124,54); HAND=(98,80); HEAD=(130,36)
+    p.append(poly(band(KNEE, ANKLE, 15), VIOLET))                 # calf
+    p.append(poly([(46,122),(58,130),(50,142),(38,134)], NAVY))   # shoe
+    p.append(poly(band(HIP, KNEE, 20), VIOLET))                   # thigh
+    p.append(poly(band(SHOULDER, HIP, 26), ORANGE))               # torso
+    p.append(poly(band((127,46),(122,56), 8), SKIN))              # neck
+    p.append(circle(HEAD, 12, SKIN))                              # head
+    p.append(path(["M",(142,34),"Q",(143,22),(130,22),"Q",(118,23),(117,34),
+                   "L",(123,36),"Q",(124,28),(131,28),"Q",(138,29),(137,36),"Z"], HAIR))
+    p.append(circle((143,28), 5.5, HAIR))                         # bun
+    # armrest pod over the hip, rounded nose
+    p.append(path(["M",(96,84),"Q",(86,84),(86,94),"L",(86,116),"L",(134,116),
+                   "L",(134,84),"Z"], SKY))
+    p.append(poly(band(SHOULDER, HAND, 11), ORANGE))              # arm onto the armrest
+    p.append(circle(HAND, 5, SKIN))                               # hand
 
-    # leg / calf rest angled down-left
-    p.append(f'<polygon points="{pts([(60,90),(60,116),(14,132),(6,112)])}" fill="{SHELL}"/>')
-    p.append(f'<polygon points="{pts([(58,94),(58,111),(18,125),(13,113)])}" fill="{PAD}"/>')
-
-    # backrest cushion, then headrest band on top of it
-    back = ["M",(104,40),"Q",(104,22),(120,22),"L",(126,22),"Q",(140,22),(140,40),
-            "L",(140,96),"L",(104,96),"Z"]
-    head = ["M",(104,40),"Q",(104,22),(120,22),"L",(126,22),"Q",(140,22),(140,40),
-            "L",(140,50),"L",(104,50),"Z"]
-    p.append(f'<path d="{d(back)}" fill="{PAD}"/>')
-    p.append(f'<path d="{d(head)}" fill="{DEEP}"/>')
-    p.append('</g>')
-
-    # seat cushion + armrest
-    p.append(f'<polygon points="{pts([(60,94),(104,94),(104,112),(60,112)])}" fill="{PAD}"/>')
-    arm = ["M",(56,78),"Q",(52,78),(52,86),"L",(52,96),"L",(104,96),"L",(104,78),"Z"]
-    p.append(f'<path d="{d(arm)}" fill="{SHELL}"/>')
-
+    # electric control: cord + remote pendant on the armrest side
+    p.append(f'<path d="{D(["M",(130,96),"Q",(140,104),(139,116)])}" fill="none" '
+             f'stroke="{NAVY}" stroke-width="{2.6*s:.1f}"/>')
+    p.append(path(["M",(134,116),"Q",(132,114),(132,120),"L",(132,136),"Q",(132,140),(136,140),
+                   "L",(144,140),"Q",(148,140),(148,136),"L",(148,120),"Q",(148,114),(144,116),"Z"], NAVY))
+    for k in range(3):
+        p.append(circle((137+k*3.4,124), 1.5, ORANGE))
+    p.append(circle((140,132), 2.2, MIDBLUE))
     p.append('</g>')
     return "".join(p)
