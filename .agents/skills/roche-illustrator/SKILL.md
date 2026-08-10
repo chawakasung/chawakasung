@@ -129,6 +129,17 @@ flat background color. Observed coverage:
   through mountains, a solar system of care, a blood drop containing a life
 - **Abstract organic** — stacked balancing forms, flowing silhouettes
 
+These come from the portal's **Illustration builder**
+(`document/29#/illustration-builder`, mapped in the `roche-templates` skill): a modular
+tool for combining characters, objects and backgrounds in Roche's **"Clear and Graphic"**
+style, with theme sets — *People at Roche* (Teamwork, Working at Roche, Company Culture),
+*Health and Wellness* (Health & Wellness, Celebration), *Business* (Achievement, Keynote),
+*Medical and Health* (Consultation, Diagnostic Treatment, Bedside Care). The two base
+characters are **Abdullah** (male) and **Ji-Hye** (female), both modular for clothing, pose
+and skin tone. Source files ship as Figma, `.fig` and `.ai` — and **the Figma artwork is PNG,
+not vector, so the `.ai` files are the only true vector source**. The raw illustration
+library itself is `document/134`.
+
 Character libraries (e.g. *Character Customisation*) hold **one character across ~25
 artboards** in different poses and outfits — standing, pointing, arms raised, running,
 seated at a desk, seated with a mug, on a bike, on a sofa — plus separate artboards of props

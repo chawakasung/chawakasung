@@ -138,7 +138,39 @@ Version 1 & 2 — **BAA**, colour variations/backgrounds; headline + sub-headlin
 ### Flyers (digital) — `/flyers`
 Digital Flyer Options 1–4 — different keyline colours + variations.
 
-### Social media — `/social-media`  *(page did not load on last dump; content TBD — refetch)*
+### Social media — `/social-media`  (the biggest sub-page)
+Templates carry **5 sizes** optimised for the 4 main platforms: **X (Twitter), Instagram,
+LinkedIn, Facebook**. Edit only the sizes for platforms you'll post on; hide unwanted assets
+via the **eye icon** to exclude them from download. Roche Global-account posts need **no logo**
+(it's in the profile picture). ⚠️ Hero-portrait "models" are Roche employees — **do not use as
+patient photos**; for patient comms use the stock library and show **"model(s) depicted"**.
+Feedback → **global.social_media@roche.com** (cc corporate.branding@roche.com).
+Template groups:
+- **Posts** — Design 01, Design 02 (both FB/IG/LI/X; edit image, graphic, text, bg colour).
+- **Media Releases** — non-editable version + editable version (add thumb-stopping caption).
+- **Awareness day posts**.
+- **YouTube thumbnails** — landscape (close-up face **or** interesting detail; no scenery,
+  no full-body, no photoshopped multi-headshots), Shorts. **Instagram thumbnails** —
+  illustration within guidelines, no text/logos, no full-body.
+- **Platform branding** — Profile image; LinkedIn cover (image+text); non-Roche-branded
+  covers: YouTube / Facebook / LinkedIn / Twitter; LinkedIn Article cover (gradient templates
+  for Roche-branded country channels).
+- **Live event branding (LinkedIn Live)** — Cover image, Holding images, Live Event posts,
+  **Four Speakers** template, **One Speaker** template.
+- **Quotes** — English, non-English (more space), Design 02, Quote carousel, Executive-team
+  quote (exec team only). *Roche advises against quotes (poor analytics)*; must show quote marks.
+- **Partner logos** — horizontal-logo template, square-logo template.
+- **LinkedIn Document posts** — standard (logo on first slide only) + Article (long docs).
+- **Carousels** — Text-based (3 slides, FB/IG) + Text-and-image (FB/IG).
+- **Mass Spec** sizes — Square **1080×1080** (FB/IG), Story **1080×1920**, Rectangle
+  **1920×960** (X), Video.
+- **"What's it worth?" campaign** — 1:1 feed/document/stat · 4:5 feed/document/stat ·
+  9:16 story/story-stat · 16:9 feed/stat · video (document posts export as **PDF** for LinkedIn).
+- **Patient Safety** profile image (click grey button → click woman photo → upload → download).
+- **Group Strategy Update** video templates — 01 (12 s) & 02 (11 s), short key message.
+- **Miscellaneous** — Breaking news, Job announcement, LinkedIn Weekly, Congress Awareness,
+  Veeva-number, Podcast, Google Sheets survey banner.
+- **Corporate Strategy** email banners — CSLT Unplugged, CS Dialogue, CS Leader Connect.
 
 ### Google Sites — `/google-sites`
 Header banner templates (arrow keylines + colour backgrounds), **two sizes** (regular / large).
@@ -229,5 +261,13 @@ Other top-nav areas: About · Brand Elements · Touchpoints · UX · GenAI · Si
 
 Every page is Roche-SSO-gated. Fetch/browse only via the authenticated Chrome **Profile 8**
 headless dump in [[roche-brand-portal]] (quit Chrome first; restore after). Always fetch the
-specific `#/…` route — landing bodies are "Lorem ipsum" placeholder. Fragment SPA routes
-occasionally dump 0 bytes; just refetch. Support: **corporate.branding@roche.com**.
+specific `#/…` route — landing bodies are "Lorem ipsum" placeholder. Support:
+**corporate.branding@roche.com** (social media: **global.social_media@roche.com**).
+
+**Stubborn routes that `--dump-dom` returns as 0 bytes** (seen on `/social-media`): the page
+pins the virtual clock with never-settling external requests (social embeds), so
+`--virtual-time-budget` never elapses and nothing dumps. CDP/remote-debugging is blocked by
+Roche's Chrome policy on Profile 8, so the fix is to **fail all non-Roche hosts** so the clock
+advances, e.g. add:
+`--host-resolver-rules="MAP * ^NOTFOUND, EXCLUDE branding.roche.com, EXCLUDE *.roche.com, EXCLUDE *.ffycdn.net, EXCLUDE *.frontify.com, EXCLUDE *.frontifyapp.com, EXCLUDE fonts.googleapis.com, EXCLUDE fonts.gstatic.com"`
+to the headless command. That recovered the full 1.1 MB `/social-media` DOM.
