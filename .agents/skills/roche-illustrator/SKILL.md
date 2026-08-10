@@ -3,7 +3,7 @@ name: roche-illustrator
 description: Create and compose artwork in the Roche brand style — flat vector illustration, brand palette, Roche Sans typography, and the official illustration/character libraries. Trigger when drawing or generating illustrations, SVG figures, infographics, social/presentation layouts, or any Roche-branded visual for diagnostics / TB & IGRA content, and when working with Roche .ai asset files.
 metadata:
   author: derived from official Roche assets supplied in-session
-  version: '0.2'
+  version: '0.3'
 ---
 
 # Roche Illustrator
@@ -145,6 +145,48 @@ artboards** in different poses and outfits — standing, pointing, arms raised, 
 seated at a desk, seated with a mug, on a bike, on a sofa — plus separate artboards of props
 and scenery. **Prefer reusing these official characters over drawing new figures**: they are
 on-brand by construction and far better drawn than anything hand-authored here.
+
+---
+
+## Construction grammar — how a Roche figure is built
+
+Measured by decomposing the official character artboards (one character, ~25 poses). A
+standing figure is **~25–30 flat shapes, no strokes**, drawn from a fixed vocabulary. Learn
+the vocabulary and you can construct a new pose that reads as authentically Roche instead of
+tracing one.
+
+**Anatomy → shape mapping**
+
+| Part | How it's built |
+| --- | --- |
+| **Head** | One rounded **skin block**. No eyes, no nose. Identity is carried entirely by a solid **hair cap** and, for bearded men, a solid **beard block** joined to the hair at the sideburns. |
+| **Expression** | A **negative-space smile** — the skin shows through a small curved gap in the beard/jaw; a tiny skin oval hints the lower lip. That single gap is the whole face. Featureless but warm. |
+| **Torso** | **One dominant rounded block** — the single largest shape, ~⅓ of the figure's area. It *is* the garment. A second garment tone layers on top for a collar, placket or soft shadow. |
+| **Arms** | Thin **bands down the sides**; rendered in **skin** where sleeves are short, in garment colour where long. Hands are small rounded blobs. |
+| **Legs** | Often **one merged trouser block with a thin centre seam line**, not two separate tubes. |
+| **Feet** | Two **navy shoe blocks** at the base. |
+
+**Proportion.** Head ≈ **1/6** of standing height. The torso block is the visual anchor —
+get its size and roundness right first, hang everything else off it.
+
+**Palette per figure.** ~5 fills: **1 skin + 1 hair + 2–3 garment tones + 1 navy (shoes)**.
+That is the "2–4 hues + skin" rule seen from the inside.
+
+**Pose is redrawn, not rigged.** The 25 poses are not limb-swaps on a skeleton — each is
+drawn fresh from the vocabulary, and **more dynamic poses use *fewer* shapes** (30 for
+arms-down → 23 for arms-up, as the badge/lanyard occlude and arms merge into the silhouette).
+So to build a new pose: keep the vocabulary, palette and proportion; redraw the limbs as
+confident bands; let parts occlude rather than drawing everything.
+
+**Line & edge feeling.** Organic, slightly imperfect rounded edges — never geometric, never
+a uniform outline. At most **one darker fold line** inside a garment. No strokes around
+figures, no gradients, no shadows on the ground.
+
+**Recomposing from parts.** Scenes = **figure + separate prop artboards** (chair, desk,
+plant, sofa) + **one flat background**. Props are their own assets; place them behind or
+beside the figure and **observe the original's stacking order** — e.g. an armrest sits *in
+front* of the hip, a desk *in front* of the shins. Take parts, but read how they overlap
+before you assemble.
 
 ---
 
