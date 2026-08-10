@@ -24,7 +24,7 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Nine are installed. Seven trigger on their own; two need to be asked for.
+Ten are installed. Eight trigger on their own; two need to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -37,6 +37,7 @@ Nine are installed. Seven trigger on their own; two need to be asked for.
 | `grill-with-docs` | mattpocock/skills | `/grill-with-docs` only — wraps the two above it |
 | `handoff` | mattpocock/skills | `/handoff` only — compacts the conversation into a handoff doc |
 | `rds-core-developer` | Roche Design System (`@rds/core`) — installed from uploaded docs | automatic |
+| `roche-illustrator` | derived from Roche brand reference illustrations | automatic |
 
 ### Installing more
 
@@ -50,11 +51,18 @@ npx skills add https://github.com/<owner>/<repo> --skill <name>
 Then read the skill's `SKILL.md` before relying on it (installed skills run with full
 agent permissions), and commit `.agents/`, `.claude/`, and `skills-lock.json` together.
 
-**Hand-installed skills.** `rds-core-developer` was assembled from uploaded Roche Design
-System docs (`@rds/core`), not fetched via `npx skills add`, so it is **not** in
-`skills-lock.json` (there is no GitHub source or hash to track). Its hub `SKILL.md` plus
-eight `SKILL-*.md` sub-skill files live in `.agents/skills/rds-core-developer/`; the hub's
-sub-skill links were rewritten from the original package paths to co-located files.
+**Hand-installed skills.** `rds-core-developer` and `roche-illustrator` were built from
+uploaded material, not fetched via `npx skills add`, so they are **not** in
+`skills-lock.json` (there is no GitHub source or hash to track).
+
+- `rds-core-developer` — assembled from uploaded Roche Design System docs (`@rds/core`). Its
+  hub `SKILL.md` plus eight `SKILL-*.md` sub-skill files live in
+  `.agents/skills/rds-core-developer/`; the hub's sub-skill links were rewritten from the
+  original package paths to co-located files.
+- `roche-illustrator` — brand illustration guidance **derived from reference illustrations**
+  provided in-session (the source files were not saved to disk, so no images are bundled). The
+  authoritative rules live at `branding.roche.com`, which is unreachable here. Cross-references
+  `rds-core-developer`'s color tokens for palette.
 
 ### Overlap to be aware of
 
