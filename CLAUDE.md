@@ -24,7 +24,7 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Ten are installed. Eight trigger on their own; two need to be asked for.
+Eleven are installed. Nine trigger on their own; two need to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -38,6 +38,7 @@ Ten are installed. Eight trigger on their own; two need to be asked for.
 | `handoff` | mattpocock/skills | `/handoff` only — compacts the conversation into a handoff doc |
 | `rds-core-developer` | Roche Design System (`@rds/core`) — installed from uploaded docs | automatic |
 | `roche-illustrator` | derived from Roche brand reference illustrations | automatic |
+| `roche-templates` | Roche Guidelines Templates portal — installed from an uploaded doc | automatic |
 
 ### Installing more
 
@@ -59,6 +60,11 @@ uploaded material, not fetched via `npx skills add`, so they are **not** in
   hub `SKILL.md` plus eight `SKILL-*.md` sub-skill files live in
   `.agents/skills/rds-core-developer/`; the hub's sub-skill links were rewritten from the
   original package paths to co-located files.
+- `roche-templates` — a map of the Roche Guidelines Templates self-service asset builder,
+  installed from an uploaded `SKILL.md`. It wiki-links five sibling skills that are **not**
+  installed here (`roche-brand-portal`, `roche-ui`, `roche-social-ad`,
+  `roche-symposium-poster`, `roche-design-templates`), and its fetch instructions assume a
+  logged-in browser profile — neither applies in this environment, where `roche.com` is blocked.
 - `roche-illustrator` — brand illustration guidance **derived from reference illustrations**
   provided in-session (the source files were not saved to disk, so no images are bundled). The
   authoritative rules live at `branding.roche.com`, which is unreachable here. Cross-references
