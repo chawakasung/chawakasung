@@ -24,7 +24,7 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Eight are installed. Six trigger on their own; two need to be asked for.
+Nine are installed. Seven trigger on their own; two need to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -36,6 +36,7 @@ Eight are installed. Six trigger on their own; two need to be asked for.
 | `domain-modeling` | mattpocock/skills | automatic |
 | `grill-with-docs` | mattpocock/skills | `/grill-with-docs` only — wraps the two above it |
 | `handoff` | mattpocock/skills | `/handoff` only — compacts the conversation into a handoff doc |
+| `rds-core-developer` | Roche Design System (`@rds/core`) — installed from uploaded docs | automatic |
 
 ### Installing more
 
@@ -48,6 +49,12 @@ npx skills add https://github.com/<owner>/<repo> --skill <name>
 
 Then read the skill's `SKILL.md` before relying on it (installed skills run with full
 agent permissions), and commit `.agents/`, `.claude/`, and `skills-lock.json` together.
+
+**Hand-installed skills.** `rds-core-developer` was assembled from uploaded Roche Design
+System docs (`@rds/core`), not fetched via `npx skills add`, so it is **not** in
+`skills-lock.json` (there is no GitHub source or hash to track). Its hub `SKILL.md` plus
+eight `SKILL-*.md` sub-skill files live in `.agents/skills/rds-core-developer/`; the hub's
+sub-skill links were rewritten from the original package paths to co-located files.
 
 ### Overlap to be aware of
 
