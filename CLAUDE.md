@@ -54,6 +54,14 @@ agent permissions), and commit `.agents/`, `.claude/`, and `skills-lock.json` to
 publishing an Artifact, load `artifact-design` as the tooling requires, and use
 `frontend-design` for aesthetic direction on top of it.
 
+## MCP servers
+
+`.mcp.json` configures the **Kling AI** MCP server (`@mindstone/mcp-server-kling`, via
+npx) for video/image generation. Credentials are read from the `KLING_ACCESS_KEY` and
+`KLING_SECRET_KEY` environment variables — set them in the remote environment settings,
+never commit them. If the tools fail with auth or network errors, check that both
+variables are set and that the network policy allows Kling API hosts.
+
 ## Environment constraints
 
 **General web access is blocked.** The network policy rejects outbound CONNECT for
