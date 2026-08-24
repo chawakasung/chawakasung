@@ -37,6 +37,12 @@
       "skillPath": "skills/karpathy-guidelines/SKILL.md",
       "computedHash": "41e8ca055bbde13d240776a14a076a59614057200340c243130a76ba4e64cac8"
     },
+    "roche-ui": {
+      "source": "user-upload",
+      "sourceType": "local",
+      "skillPath": ".agents/skills/roche-ui/SKILL.md",
+      "computedHash": "548e99d514e2dade29757e455c0d506722692bb9bd83b1110c035ab6b65f0815"
+    },
     "scrutinize": {
       "source": "thananon/9arm-skills",
       "sourceType": "github",
