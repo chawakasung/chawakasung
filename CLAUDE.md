@@ -24,7 +24,7 @@ skills-lock.json                       skill manifest (source + path + hash per 
 
 ## Skills
 
-Seven are installed. Six trigger on their own; one needs to be asked for.
+Eight are installed. Seven trigger on their own; one needs to be asked for.
 
 | Skill | Source | Invocation |
 |---|---|---|
@@ -35,6 +35,7 @@ Seven are installed. Six trigger on their own; one needs to be asked for.
 | `grilling` | mattpocock/skills | automatic |
 | `domain-modeling` | mattpocock/skills | automatic |
 | `grill-with-docs` | mattpocock/skills | `/grill-with-docs` only — wraps the two above it |
+| `roche-ui` | local (user-provided) | automatic — Roche.com design-system tokens for brand-matched UI |
 
 ### Installing more
 
