@@ -1,0 +1,6 @@
+# Blender backups and large exchange exports (regenerate with blender/bronze_bust.py)
+*.blend1
+*.blend2
+blender/output/*.obj
+blender/output/*.mtl
+__pycache__/

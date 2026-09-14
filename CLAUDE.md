@@ -17,6 +17,8 @@ to this file when real tooling arrives.
 ```
 CLAUDE.md                              this file
 docs/roche-image-sources-tb-igra.md    catalogue of Roche image sources for the topic
+blender/bronze_bust.py                 procedural bronze-bust scene (run with the `bpy` pip module)
+blender/output/                        bust.blend, bust.glb, preview.png (obj/mtl are git-ignored)
 skills-lock.json                       skill manifest (source + path + hash per skill)
 .agents/skills/<name>/                 installed skills (real files)
 .claude/skills/<name>                  symlinks into .agents/skills/
