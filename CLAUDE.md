@@ -20,7 +20,15 @@ picked as local folders in the browser (SVG / AI / PDF / PNG / JPG). SVGs with n
 top-level groups are split into reusable parts; `.ai` files are rasterised with the
 vendored pdf.js in `app/vendor/`. The hard rule: never draw or generate artwork that is
 not in the loaded library. The library itself lives on the user's Mac and is not in
-this repo.
+this repo; once picked it is remembered in the browser's IndexedDB.
+
+Two ways of choosing items: keyword matching of the prompt against file/layer names
+(no network), or — when the user enters an Anthropic API key — a vision call
+(`claude-opus-5-5`, structured output) that sees the source image plus contact sheets
+of the library and returns item ids with positions. Ids not in the library are dropped.
+`app/vendor/anthropic-sdk.js` is `@anthropic-ai/sdk` 1.12.0 bundled as an IIFE
+(`esbuild --bundle --format=iife --global-name=AnthropicSDK`) because module scripts do
+not load from `file://`. The vision path has only been tested against a mocked API.
 
 ## Layout
 
@@ -28,7 +36,7 @@ this repo.
 CLAUDE.md                              this file
 docs/roche-image-sources-tb-igra.md    catalogue of Roche image sources for the topic
 app/index.html                         OFC Illustrate Composer (static web app)
-app/vendor/                            pdf.js 3.11.174 (Apache-2.0), used to read .ai files
+app/vendor/                            pdf.js 3.11.174 (reads .ai) and the bundled Anthropic SDK
 skills-lock.json                       skill manifest (source + path + hash per skill)
 .agents/skills/<name>/                 installed skills (real files)
 .claude/skills/<name>                  symlinks into .agents/skills/
