@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OFC Illustrate Composer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#06236b;        /* deep blue text */
+  --blue:#0b41cd;       /* primary */
+  --sky:#bde3ff;        /* light blue */
+  --mist:#eef6fd;       /* page */
+  --paper:#ffffff;
+  --peach:#fac9b5;      /* warm accent */
+  --line:#c9d9ee;
+  --muted:#5a6b8c;
+  --r:14px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--mist);color:var(--ink);font:400 15px/1.5 "IBM Plex Sans Thai",system-ui,sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--peach);outline-offset:2px}
+.mono{font:500 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+header.top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding:18px 24px 6px}
+header.top h1{font-size:22px;font-weight:600;margin:0;letter-spacing:-.01em}
+header.top p{margin:0;color:var(--muted)}
+
+.bench{display:grid;grid-template-columns:minmax(260px,1fr) minmax(220px,300px) minmax(320px,1.35fr);gap:16px;padding:12px 24px;align-items:stretch}
+@media (max-width:980px){.bench{grid-template-columns:1fr;padding:12px 16px}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel>.mono{display:flex;justify-content:space-between;gap:8px}
+
+/* source */
+.drop{position:relative;flex:1;min-height:210px;border:2px dashed var(--sky);border-radius:10px;display:grid;place-items:center;text-align:center;padding:14px;cursor:pointer;background:var(--mist);overflow:hidden}
+.drop.over{border-color:var(--blue);background:#e2f0fd}
+.drop img{max-width:100%;max-height:300px;border-radius:6px;display:block}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop small{color:var(--muted);display:block}
+textarea{width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+label{font-weight:500}
+.btn{border:1px solid var(--blue);background:var(--paper);color:var(--blue);border-radius:999px;padding:8px 16px;font-weight:500;cursor:pointer}
+.btn:hover{background:var(--mist)}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{background:#0935a8}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{padding:4px 11px;font-size:13px}
+
+/* machine */
+.machine{justify-content:center;align-items:center;background:linear-gradient(180deg,#fff, #f4f9fe)}
+.machine svg{width:100%;max-width:280px;height:auto}
+.status{min-height:44px;text-align:center;font-weight:500}
+.status small{display:block;color:var(--muted);font-weight:400}
+.gear{transform-box:fill-box;transform-origin:center}
+.belt{stroke-dasharray:10 8}
+.lamp{fill:var(--line)}
+.sheet{opacity:0}
+.running .gear{animation:spin 1.6s linear infinite}
+.running .gear.rev{animation-direction:reverse}
+.running .belt{animation:belt .5s linear infinite}
+.running .lamp{fill:var(--peach);animation:blink .6s ease-in-out infinite alternate}
+.running .sheet.in{animation:feedIn 1.3s ease-in infinite}
+.running .sheet.out{animation:feedOut 1.3s ease-out infinite .65s}
+.done .lamp{fill:#3ecf8e}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes belt{to{stroke-dashoffset:-18}}
+@keyframes blink{to{opacity:.35}}
+@keyframes feedIn{0%{opacity:0;transform:translateX(-26px)}30%{opacity:1}100%{opacity:0;transform:translateX(26px)}}
+@keyframes feedOut{0%{opacity:0;transform:translateX(-22px)}40%{opacity:1}100%{opacity:0;transform:translateX(30px)}}
+@media (prefers-reduced-motion:reduce){.running .gear,.running .belt,.running .sheet,.running .lamp{animation:none}.running .sheet{opacity:1}}
+
+/* output */
+.stage{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;border:1px solid var(--line);overflow:hidden;touch-action:none;
+  background:conic-gradient(#f3f7fc 25%,#fff 0 50%,#f3f7fc 0 75%,#fff 0) 0 0/20px 20px}
+.stage .ghost{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0}
+.stage .layer{position:absolute;transform:translate(-50%,-50%);cursor:grab;user-select:none;-webkit-user-drag:none}
+.stage .layer.sel{outline:2px solid var(--blue);outline-offset:3px}
+.stage .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);padding:24px;pointer-events:none}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tools label{font-weight:400;font-size:13px;display:flex;align-items:center;gap:6px;color:var(--muted)}
+.manifest{margin:0;padding:0;list-style:none;max-height:120px;overflow:auto;font:400 12px/1.5 "IBM Plex Mono",ui-monospace,monospace;color:var(--muted)}
+.manifest li{display:flex;gap:8px;border-top:1px dashed var(--line);padding:3px 0}
+.manifest li.sel{color:var(--blue)}
+.manifest b{font-weight:500;color:var(--ink);flex:none}
+
+/* library */
+.library{margin:4px 24px 32px}
+@media (max-width:980px){.library{margin:4px 16px 24px}}
+.libhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.libhead input[type=search]{flex:1;min-width:160px;border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:3px 11px;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px;max-height:420px;overflow:auto;padding:2px}
+.thumb{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
+.thumb:hover{border-color:var(--blue)}
+.thumb img{width:100%;aspect-ratio:1;object-fit:contain}
+.thumb span{font-size:11.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumb i{font-style:normal;font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.note{color:var(--muted);margin:0}
+#measure{position:fixed;left:0;top:0;visibility:hidden;pointer-events:none}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>OFC Illustrate Composer</h1>
+  <p>แปลงรูปต้นฉบับเป็นภาพ Illustrate โดยใช้เฉพาะชิ้นส่วนที่มีอยู่ในไลบรารี Illustrate ของคุณ</p>
+</header>
+
+<main class="bench">
+  <section class="panel" aria-label="ต้นฉบับ">
+    <div class="mono"><span>Source</span><span id="srcInfo"></span></div>
+    <div class="drop" id="drop">
+      <div id="dropHint"><strong>วางรูปต้นฉบับที่นี่</strong><small>หรือคลิกเพื่อเลือกไฟล์ (PNG, JPG, WebP)</small></div>
+      <input type="file" id="srcFile" accept="image/*" aria-label="เลือกรูปต้นฉบับ">
+    </div>
+    <label for="prompt">Prompt กำกับ</label>
+    <textarea id="prompt" placeholder="เช่น นักวิทยาศาสตร์หญิง ยืนข้างเครื่องตรวจ ถือหลอดเลือด"></textarea>
+    <button class="btn primary" id="convert">แปลงเป็น Illustrate</button>
+  </section>
+
+  <section class="panel machine" id="machine" aria-label="เครื่องแปลง">
+    <svg viewBox="0 0 280 240" role="img" aria-label="เครื่องแปลงรูป">
+      <!-- intake -->
+      <path d="M8 96h44l14 14v20l-14 14H8z" fill="#bde3ff"/>
+      <rect class="sheet in" x="14" y="108" width="26" height="24" rx="3" fill="#fff" stroke="#0b41cd" stroke-width="2"/>
+      <!-- outlet -->
+      <path d="M272 96h-44l-14 14v20l14 14h44z" fill="#fac9b5"/>
+      <g class="sheet out"><rect x="236" y="106" width="28" height="28" rx="6" fill="#fff" stroke="#06236b" stroke-width="2"/><circle cx="250" cy="117" r="4" fill="#0b41cd"/><path d="M242 130c2-7 14-7 16 0" fill="#0b41cd"/></g>
+      <!-- body -->
+      <rect x="56" y="40" width="168" height="160" rx="22" fill="#0b41cd"/>
+      <rect x="72" y="58" width="136" height="92" rx="12" fill="#eef6fd"/>
+      <g fill="#06236b">
+        <g class="gear" ><path d="M108 78l5 1 2-6 7 0 2 6 5-1 4 6-4 4 2 5 6 2v7l-6 2-2 5 4 4-4 6-5-1-2 6h-7l-2-6-5 1-4-6 4-4-2-5-6-2v-7l6-2 2-5-4-4z" transform="translate(-6 0)"/></g>
+        <g class="gear rev"><path d="M108 78l5 1 2-6 7 0 2 6 5-1 4 6-4 4 2 5 6 2v7l-6 2-2 5 4 4-4 6-5-1-2 6h-7l-2-6-5 1-4-6 4-4-2-5-6-2v-7l6-2 2-5-4-4z" transform="translate(48 8) scale(.8) translate(18 16)"/></g>
+      </g>
+      <circle cx="109.500" cy="104" r="8" fill="#eef6fd"/><circle cx="158.800" cy="108" r="6.500" fill="#eef6fd"/>
+      <line class="belt" x1="80" y1="140" x2="200" y2="140" stroke="#0b41cd" stroke-width="4" stroke-linecap="round"/>
+      <circle class="lamp" cx="88" cy="174" r="7"/>
+      <rect x="106" y="168" width="60" height="12" rx="6" fill="#bde3ff"/>
+      <rect x="176" y="168" width="32" height="12" rx="6" fill="#fac9b5"/>
+      <!-- legs -->
+      <rect x="78" y="200" width="18" height="22" rx="4" fill="#06236b"/><rect x="184" y="200" width="18" height="22" rx="4" fill="#06236b"/>
+    </svg>
+    <div class="status" id="status" aria-live="polite">พร้อมทำงาน<small>ใส่รูป, prompt และโหลดไลบรารีก่อน</small></div>
+  </section>
+
+  <section class="panel" aria-label="ผลลัพธ์">
+    <div class="mono"><span>Illustrate</span><span id="outInfo"></span></div>
+    <div class="stage" id="stage">
+      <img class="ghost" id="ghost" alt="">
+      <div class="empty" id="empty">ภาพที่ประกอบจากไลบรารีจะแสดงที่นี่<br>ลากเพื่อจัดวาง · คลิกชิ้นส่วนในไลบรารีเพื่อเพิ่มเอง</div>
+    </div>
+    <div class="tools">
+      <label>ขนาด <input type="range" id="size" min="4" max="120" value="30" disabled></label>
+      <button class="btn small" id="flip" disabled>กลับด้าน</button>
+      <button class="btn small" id="fwd" disabled>ขึ้นหน้า</button>
+      <button class="btn small" id="back" disabled>ลงหลัง</button>
+      <button class="btn small" id="del" disabled>ลบ</button>
+      <label>เงาต้นฉบับ <input type="range" id="ghostOp" min="0" max="60" value="0"></label>
+      <button class="btn small primary" id="export" disabled style="margin-left:auto">บันทึก PNG</button>
+    </div>
+    <div class="mono"><span>ที่มาของชิ้นส่วน</span></div>
+    <ul class="manifest" id="manifest"></ul>
+  </section>
+</main>
+
+<section class="panel library" aria-label="ไลบรารี">
+  <div class="libhead">
+    <span class="mono" id="libCount">Library · ยังไม่ได้โหลด</span>
+    <label class="btn" style="position:relative;overflow:hidden"><span id="libPick">เลือกโฟลเดอร์ไลบรารี</span>
+      <input type="file" id="libDir" webkitdirectory multiple style="position:absolute;inset:0;opacity:0;cursor:pointer">
+    </label>
+    <button class="btn small" id="libClear" hidden>ล้างไลบรารี</button>
+    <input type="search" id="q" placeholder="ค้นหาชื่อไฟล์หรือชิ้นส่วน" aria-label="ค้นหาในไลบรารี">
+  </div>
+  <div class="chips" id="chips"></div>
+  <p class="note" id="libNote">เลือกโฟลเดอร์ไลบรารีบนเครื่องของคุณ เพิ่มได้หลายโฟลเดอร์ทีละโฟลเดอร์ (เช่น OFC-Illustrate, Alternative, FULL ILLUSTRATION LIBRARY - ADOBE ILLUSTRATOR) ไฟล์ถูกอ่านในเบราว์เซอร์เท่านั้น ไม่ถูกอัปโหลดไปที่ใด รองรับ SVG, AI, PDF, PNG, JPG, WebP — ไฟล์ SVG ที่มีกลุ่ม (layer) ตั้งชื่อไว้จะถูกแยกเป็นชิ้นส่วนให้อัตโนมัติ ส่วนไฟล์ AI จะได้เป็นภาพทั้งอาร์ตบอร์ดแรก</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<div id="measure"></div>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const IMG_EXT = /\.(svg|png|jpe?g|webp|gif|ai|pdf)$/i;
+const AI_EXT = /\.(ai|pdf)$/i;
+const MAX_PICKS = 6, MAX_PER_CATEGORY = 2;
+
+/* Thai prompt words -> English tags commonly used in file / layer names */
+const TH = {
+  "หน้า":["face","head"],"ใบหน้า":["face"],"หัว":["head"],"ผม":["hair"],"ตา":["eye","eyes"],"ปาก":["mouth","lips"],
+  "ยิ้ม":["smile","happy"],"แขน":["arm","arms"],"มือ":["hand","hands"],"ขา":["leg","legs"],"เท้า":["foot","feet","shoe"],
+  "เสื้อ":["shirt","top","coat","clothes"],"กาวน์":["coat","labcoat","gown"],"กางเกง":["pants","trousers"],"กระโปรง":["skirt"],
+  "ลำตัว":["body","torso"],"ท่า":["pose"],"ยืน":["standing","stand"],"นั่ง":["sitting","sit"],"เดิน":["walking","walk"],
+  "ผู้หญิง":["woman","female","girl"],"หญิง":["woman","female"],"ผู้ชาย":["man","male","boy"],"ชาย":["man","male"],
+  "เด็ก":["child","kid"],"ผู้สูงอายุ":["elderly","senior","old"],"คน":["person","people","character"],
+  "หมอ":["doctor","physician"],"แพทย์":["doctor","physician"],"พยาบาล":["nurse"],"ผู้ป่วย":["patient"],"คนไข้":["patient"],
+  "นักวิทยาศาสตร์":["scientist","researcher","lab"],"นักเทคนิค":["technician","lab"],"แล็บ":["lab","laboratory"],
+  "ห้องปฏิบัติการ":["lab","laboratory"],"เครื่อง":["machine","analyzer","instrument","device"],"หลอด":["tube","vial"],
+  "เลือด":["blood"],"กล้องจุลทรรศน์":["microscope"],"คอมพิวเตอร์":["computer","laptop","screen"],"โรงพยาบาล":["hospital"],
+  "ปอด":["lung","lungs"],"ยา":["medicine","pill","drug"],"หัวใจ":["heart"],"ครอบครัว":["family"],"พื้นหลัง":["background","bg"]
+};
+
+const state = { lib: [], cat: null, layers: [], sel: null, srcUrl: null, aspect: 4/3, uid: 0 };
+
+/* ---------- library ---------- */
+function tagsOf(str){
+  return [...new Set(str.replace(IMG_EXT,"").replace(/_x[0-9A-Fa-f]{2,4}_/g," ").replace(/([a-z])([A-Z])/g,"$1 $2")
+    .toLowerCase().split(/[\/\\_\-\s.,()]+/).filter(t => t.length > 1 && !/^\d+$/.test(t)))];
+}
+function cleanName(s){ return s.replace(/_x[0-9A-Fa-f]{2,4}_/g," ").replace(/[_-]+/g," ").replace(/\s+\d+$/,"").trim(); }
+
+function imageSize(url){
+  return new Promise(res => { const im = new Image(); im.onload = () => res([im.naturalWidth||1, im.naturalHeight||1]); im.onerror = () => res(null); im.src = url; });
+}
+
+/* Adobe Illustrator files saved with "PDF compatible" on: draw artboard 1 to a PNG. */
+let pdfjsReady;
+function loadPdfjs(){
+  return pdfjsReady ||= new Promise((res, rej) => {
+    const s = document.createElement("script"); s.src = "vendor/pdf.min.js";
+    s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "vendor/pdf.worker.min.js"; res(window.pdfjsLib); };
+    s.onerror = () => rej(new Error("โหลด vendor/pdf.min.js ไม่ได้")); document.head.append(s);
+  });
+}
+async function aiToPng(file){
+  const pdfjs = await loadPdfjs();
+  const pdf = await pdfjs.getDocument({ data: await file.arrayBuffer() }).promise;
+  const page = await pdf.getPage(1);
+  const base = page.getViewport({ scale: 1 });
+  const vp = page.getViewport({ scale: Math.min(4, 1600 / Math.max(base.width, base.height)) });
+  const c = document.createElement("canvas"); c.width = Math.ceil(vp.width); c.height = Math.ceil(vp.height);
+  await page.render({ canvasContext: c.getContext("2d"), viewport: vp, background: "rgba(0,0,0,0)" }).promise;
+  pdf.destroy();
+  return new Promise(res => c.toBlob(res, "image/png"));
+}
+
+/* Split an SVG into named top-level groups. Returns [{name, svgText}] or []. */
+function splitSvg(text){
+  const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+  const root = doc.documentElement;
+  if (!root || root.nodeName !== "svg" || doc.querySelector("parsererror")) return [];
+  const vb = (root.getAttribute("viewBox")||"").trim().split(/[\s,]+/).map(Number);
+  if (vb.length !== 4 || vb.some(isNaN) || !vb[2] || !vb[3]) return [];
+  root.querySelectorAll("script,foreignObject").forEach(n => n.remove());
+  const SKIP = new Set(["defs","style","title","desc","metadata","clipPath","mask","linearGradient","radialGradient","pattern","symbol","filter"]);
+  const drawn = el => [...el.children].filter(c => !SKIP.has(c.localName));
+  const nameOf = el => el.getAttribute("data-name") || el.getAttribute("inkscape:label") || el.getAttribute("id") || "";
+  // descend through single wrapper groups, remembering the index path
+  const path = []; let box = root;
+  for (;;) { const k = drawn(box); if (k.length === 1 && k[0].localName === "g") { path.push([...box.children].indexOf(k[0])); box = k[0]; } else break; }
+  const kids = drawn(box);
+  const named = kids.filter(k => k.localName === "g" && nameOf(k));
+  if (named.length < 2 || named.length > 60) return [];
+
+  // render hidden at 1 viewBox unit = 1px to measure each group
+  const live = document.importNode(root, true);
+  live.setAttribute("width", vb[2]); live.setAttribute("height", vb[3]); live.setAttribute("preserveAspectRatio","none");
+  live.style.display = "block";
+  $("measure").replaceChildren(live);
+  let liveBox = live; for (const i of path) liveBox = liveBox.children[i];
+  const origin = live.getBoundingClientRect();
+  const out = [];
+  for (const g of named) {
+    const idx = [...box.children].indexOf(g);
+    const r = liveBox.children[idx].getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    const pad = Math.max(r.width, r.height) * 0.02;
+    const clone = root.cloneNode(true);
+    let cb = clone; for (const i of path) cb = cb.children[i];
+    [...cb.children].forEach((c, i) => { if (i !== idx && !SKIP.has(c.localName)) c.remove(); });
+    const w = r.width + pad*2, h = r.height + pad*2;
+    clone.setAttribute("viewBox", [vb[0] + r.left - origin.left - pad, vb[1] + r.top - origin.top - pad, w, h].join(" "));
+    clone.setAttribute("width", w); clone.setAttribute("height", h);
+    clone.removeAttribute("style");
+    out.push({ name: cleanName(nameOf(g)), svgText: new XMLSerializer().serializeToString(clone) });
+  }
+  $("measure").replaceChildren();
+  return out;
+}
+
+async function loadLibrary(files){
+  const imgs = [...files].filter(f => IMG_EXT.test(f.name) && !f.name.startsWith("."));
+  const known = new Set(state.lib.map(i => i.source));
+  let skipped = 0;
+  $("libCount").textContent = "Library · กำลังอ่าน " + imgs.length + " ไฟล์…";
+  for (const f of imgs) {
+    const rel = f.webkitRelativePath || f.name;
+    if (known.has(rel)) continue;                       // same folder picked twice
+    const segs = rel.split("/");
+    const dirs = segs.slice(1, -1);                     // between the picked root folder and the file name
+    const category = dirs[0] || (segs.length > 1 ? segs[0] : "ทั่วไป");
+    const base = f.name.replace(IMG_EXT, "");
+    const isSvg = /\.svg$/i.test(f.name);
+    let blob = f;
+    if (isSvg) blob = new Blob([await f.arrayBuffer()], {type:"image/svg+xml"});
+    else if (AI_EXT.test(f.name)) {
+      try { blob = await aiToPng(f); } catch (e) { console.warn("cannot read", rel, e); skipped++; continue; }
+    }
+    const url = URL.createObjectURL(blob);
+    const size = await imageSize(url);
+    if (!size) { URL.revokeObjectURL(url); skipped++; continue; }
+    state.lib.push({ id: ++state.uid, name: cleanName(base), source: rel, category, part: false, url, ratio: size[0]/size[1], tags: tagsOf(dirs.join("/") + "/" + base) });
+    if (isSvg) {
+      let parts = [];
+      try { parts = splitSvg(await f.text()); } catch (e) { console.warn("split failed", rel, e); }
+      for (const p of parts) {
+        const purl = URL.createObjectURL(new Blob([p.svgText], {type:"image/svg+xml"}));
+        const ps = await imageSize(purl);
+        if (!ps) { URL.revokeObjectURL(purl); continue; }
+        state.lib.push({ id: ++state.uid, name: p.name, source: rel + " › " + p.name, category, part: true, url: purl, ratio: ps[0]/ps[1], tags: tagsOf(dirs.join("/") + "/" + base + "/" + p.name) });
+      }
+    }
+  }
+  state.cat = null;
+  renderLibrary();
+  if (skipped) setStatus("อ่านไม่ได้ " + skipped + " ไฟล์", "ไฟล์ .ai ต้องบันทึกแบบ Create PDF Compatible File");
+}
+function clearLibrary(){
+  state.lib.forEach(i => URL.revokeObjectURL(i.url));
+  state.lib = []; state.layers = []; state.sel = null; state.cat = null;
+  renderLibrary(); render();
+}
+
+function renderLibrary(){
+  const whole = state.lib.filter(i => !i.part).length, parts = state.lib.length - whole;
+  $("libCount").textContent = state.lib.length ? `Library · ${whole} ภาพ · ${parts} ชิ้นส่วน` : "Library · ยังไม่ได้โหลด";
+  $("libNote").hidden = state.lib.length > 0;
+  $("libClear").hidden = !state.lib.length;
+  $("libPick").textContent = state.lib.length ? "เพิ่มโฟลเดอร์อีก" : "เลือกโฟลเดอร์ไลบรารี";
+  const cats = [...new Set(state.lib.map(i => i.category))].sort();
+  const chips = $("chips"); chips.replaceChildren();
+  if (cats.length > 1) for (const c of [null, "§parts", ...cats]) {
+    const b = document.createElement("button"); b.className = "chip";
+    b.textContent = c === null ? "ทั้งหมด" : c === "§parts" ? "เฉพาะชิ้นส่วน" : c;
+    b.setAttribute("aria-pressed", state.cat === c);
+    b.onclick = () => { state.cat = c; renderLibrary(); };
+    chips.append(b);
+  }
+  const q = $("q").value.trim().toLowerCase();
+  const grid = $("grid"); grid.replaceChildren();
+  const shown = state.lib.filter(i => (state.cat === null || (state.cat === "§parts" ? i.part : i.category === state.cat)) && (!q || i.source.toLowerCase().includes(q)));
+  for (const it of shown.slice(0, 600)) {
+    const b = document.createElement("button"); b.className = "thumb"; b.title = "เพิ่มลงภาพ: " + it.source;
+    const im = document.createElement("img"); im.src = it.url; im.alt = ""; im.loading = "lazy";
+    const s = document.createElement("span"); s.textContent = it.name;
+    const c = document.createElement("i"); c.textContent = (it.part ? "ชิ้นส่วน · " : "") + it.category;
+    b.append(im, s, c); b.onclick = () => { addLayer(it); render(); };
+    grid.append(b);
+  }
+  if (state.lib.length && !shown.length) { const p = document.createElement("p"); p.className = "note"; p.textContent = "ไม่พบชิ้นส่วนที่ตรงกับคำค้น"; grid.append(p); }
+}
+
+/* ---------- planner: prompt -> library items ---------- */
+function promptTokens(prompt){
+  const p = prompt.toLowerCase();
+  const tokens = new Set(p.split(/[^a-z0-9฀-๿]+/).filter(t => t.length > 1));
+  for (const [th, en] of Object.entries(TH)) if (p.includes(th)) en.forEach(t => tokens.add(t));
+  return { tokens: [...tokens], raw: p };
+}
+function scoreItem(it, {tokens, raw}){
+  let s = 0;
+  for (const tag of it.tags) {
+    if (/[^\x00-\x7f]/.test(tag)) { if (raw.includes(tag)) s += 3; continue; }
+    for (const t of tokens) {
+      if (t === tag || t === tag + "s" || t + "s" === tag) s += 3;
+      else if (t.length > 3 && tag.length > 3 && (tag.includes(t) || t.includes(tag))) s += 1;
+    }
+  }
+  return s;
+}
+function plan(prompt){
+  const pt = promptTokens(prompt);
+  const ranked = state.lib.map(it => ({it, s: scoreItem(it, pt)})).filter(x => x.s > 0)
+    .sort((a,b) => b.s - a.s || (a.it.part - b.it.part));
+  const picks = [], perCat = {}, usedFiles = new Set();
+  for (const {it} of ranked) {
+    const file = it.source.split(" › ")[0];
+    // a whole picture already includes its own parts: don't stack both
+    if (it.part ? usedFiles.has("W:" + file) : usedFiles.has("P:" + file)) continue;
+    if ((perCat[it.category] || 0) >= MAX_PER_CATEGORY) continue;
+    picks.push(it); perCat[it.category] = (perCat[it.category] || 0) + 1; usedFiles.add((it.part ? "P:" : "W:") + file);
+    if (picks.length >= MAX_PICKS) break;
+  }
+  return picks;
+}
+
+/* ---------- stage ---------- */
+function addLayer(it, x = 50, y = 50, w){
+  const maxW = 40, byHeight = 70 * it.ratio / state.aspect;   // keep within 70% of stage height
+  const L = { id: ++state.uid, item: it, x, y, w: w || Math.min(maxW, byHeight), flip: false };
+  state.layers.push(L); state.sel = L.id; return L;
+}
+function autoLayout(picks){
+  state.layers = []; state.sel = null;
+  const n = picks.length, slot = 100 / n;
+  picks.forEach((it, i) => {
+    const w = Math.min(slot * 0.86, 62 * it.ratio / state.aspect);
+    addLayer(it, slot * (i + .5), 52, w);
+  });
+  state.sel = null;
+}
+function render(){
+  const stage = $("stage");
+  stage.style.aspectRatio = state.aspect;
+  stage.querySelectorAll(".layer").forEach(n => n.remove());
+  for (const L of state.layers) {
+    const im = document.createElement("img");
+    im.className = "layer" + (L.id === state.sel ? " sel" : ""); im.src = L.item.url; im.alt = L.item.name; im.draggable = false;
+    im.style.cssText = `left:${L.x}%;top:${L.y}%;width:${L.w}%;transform:translate(-50%,-50%) scaleX(${L.flip ? -1 : 1})`;
+    im.onpointerdown = e => startDrag(e, L, im);
+    stage.append(im);
+  }
+  $("empty").hidden = state.layers.length > 0;
+  const sel = state.layers.find(l => l.id === state.sel);
+  for (const id of ["size","flip","fwd","back","del"]) $(id).disabled = !sel;
+  if (sel) $("size").value = sel.w;
+  $("export").disabled = !state.layers.length;
+  $("outInfo").textContent = state.layers.length ? state.layers.length + " ชิ้น" : "";
+  const m = $("manifest"); m.replaceChildren();
+  state.layers.forEach((L, i) => {
+    const li = document.createElement("li"); if (L.id === state.sel) li.className = "sel";
+    const b = document.createElement("b"); b.textContent = String(i + 1).padStart(2, "0");
+    const s = document.createElement("span"); s.textContent = L.item.source;
+    li.append(b, s); m.append(li);
+  });
+}
+function startDrag(e, L, el){
+  e.preventDefault();
+  if (state.sel !== L.id) { state.sel = L.id; render(); el = [...$("stage").querySelectorAll(".layer")][state.layers.indexOf(L)]; }
+  const r = $("stage").getBoundingClientRect(), sx = e.clientX, sy = e.clientY, ox = L.x, oy = L.y;
+  const move = ev => { L.x = Math.max(0, Math.min(100, ox + (ev.clientX - sx) / r.width * 100)); L.y = Math.max(0, Math.min(100, oy + (ev.clientY - sy) / r.height * 100)); el.style.left = L.x + "%"; el.style.top = L.y + "%"; };
+  const up = () => { removeEventListener("pointermove", move); removeEventListener("pointerup", up); };
+  addEventListener("pointermove", move); addEventListener("pointerup", up);
+}
+$("stage").addEventListener("pointerdown", e => { if (e.target === $("stage")) { state.sel = null; render(); } });
+const withSel = fn => () => { const i = state.layers.findIndex(l => l.id === state.sel); if (i >= 0) { fn(state.layers[i], i); render(); } };
+$("size").oninput = withSel(L => { L.w = +$("size").value; });
+$("flip").onclick = withSel(L => { L.flip = !L.flip; });
+$("fwd").onclick  = withSel((L, i) => { if (i < state.layers.length - 1) state.layers.splice(i + 1, 0, state.layers.splice(i, 1)[0]); });
+$("back").onclick = withSel((L, i) => { if (i > 0) state.layers.splice(i - 1, 0, state.layers.splice(i, 1)[0]); });
+$("del").onclick  = withSel((L, i) => { state.layers.splice(i, 1); state.sel = null; });
+addEventListener("keydown", e => { if ((e.key === "Delete" || e.key === "Backspace") && state.sel && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) $("del").click(); });
+$("ghostOp").oninput = () => { $("ghost").style.opacity = $("ghostOp").value / 100; };
+
+/* ---------- source ---------- */
+async function setSource(file){
+  if (!file || !file.type.startsWith("image/")) return;
+  if (state.srcUrl) URL.revokeObjectURL(state.srcUrl);
+  state.srcUrl = URL.createObjectURL(file);
+  const size = await imageSize(state.srcUrl);
+  if (!size) { setStatus("เปิดรูปนี้ไม่ได้", "ลองไฟล์ PNG หรือ JPG"); return; }
+  state.aspect = Math.max(.5, Math.min(2.4, size[0] / size[1]));
+  const im = document.createElement("img"); im.src = state.srcUrl; im.alt = "รูปต้นฉบับ";
+  $("dropHint").replaceChildren(im);
+  $("srcInfo").textContent = size[0] + "×" + size[1];
+  $("ghost").src = state.srcUrl;
+  render();
+}
+$("srcFile").onchange = e => setSource(e.target.files[0]);
+const drop = $("drop");
+["dragenter","dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => setSource(e.dataTransfer.files[0]));
+
+/* ---------- convert ---------- */
+function setStatus(main, sub){
+  const s = $("status"); s.replaceChildren(main);
+  if (sub) { const sm = document.createElement("small"); sm.textContent = sub; s.append(sm); }
+}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+$("convert").onclick = async () => {
+  const prompt = $("prompt").value.trim();
+  if (!state.lib.length) return setStatus("ยังไม่มีไลบรารี", "เลือกโฟลเดอร์ไลบรารีด้านล่างก่อน");
+  if (!prompt) return setStatus("ยังไม่มี prompt", "บอกสิ่งที่ต้องการให้อยู่ในภาพ");
+  const m = $("machine"); m.classList.remove("done"); m.classList.add("running"); $("convert").disabled = true;
+  setStatus("กำลังอ่านต้นฉบับ", state.srcUrl ? "ใช้สัดส่วนภาพจากรูปต้นฉบับ" : "ไม่มีรูปต้นฉบับ ใช้สัดส่วน 4:3"); await wait(700);
+  setStatus("กำลังค้นชิ้นส่วนในไลบรารี", state.lib.length + " รายการ");
+  const picks = plan(prompt); await wait(800);
+  setStatus("กำลังประกอบภาพ"); await wait(600);
+  m.classList.remove("running"); $("convert").disabled = false;
+  if (!picks.length) return setStatus("ไม่พบชิ้นส่วนที่ตรงกับ prompt", "ลองใช้คำที่ตรงกับชื่อไฟล์ หรือคลิกเลือกจากไลบรารีเอง");
+  autoLayout(picks); render();
+  m.classList.add("done");
+  setStatus("ประกอบเสร็จแล้ว", picks.length + " ชิ้นจากไลบรารี · ลากเพื่อจัดวางต่อได้");
+};
+
+/* ---------- export ---------- */
+$("export").onclick = async () => {
+  const W = 2400, H = Math.round(W / state.aspect);
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
+  const ctx = c.getContext("2d");
+  for (const L of state.layers) {
+    const im = new Image(); im.src = L.item.url; await im.decode();
+    const w = L.w / 100 * W, h = w / L.item.ratio;
+    ctx.save(); ctx.translate(L.x / 100 * W, L.y / 100 * H); if (L.flip) ctx.scale(-1, 1);
+    ctx.drawImage(im, -w/2, -h/2, w, h); ctx.restore();
+  }
+  c.toBlob(b => { const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "illustrate.png"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }, "image/png");
+};
+
+$("libDir").onchange = async e => { await loadLibrary(e.target.files); e.target.value = ""; };
+$("libClear").onclick = clearLibrary;
+$("q").oninput = renderLibrary;
+render();
+</script>
+</body>
+</html>

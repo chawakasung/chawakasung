@@ -8,15 +8,27 @@ A working repository for the **TB & IGRA with Full Automation** topic — tuberc
 infection (TBI/LTBI) screening by Interferon-Gamma Release Assay on fully automated
 laboratory systems.
 
-**There is no application code yet.** Right now the repo holds research notes and an
-installed skill set. Do not invent build, test, or lint commands — none exist. Add them
+The repo holds research notes, an installed skill set, and one static web app
+(`app/`). There is no build, test, or lint tooling — do not invent commands. Add them
 to this file when real tooling arrives.
+
+### `app/` — OFC Illustrate Composer
+
+A single-file web app (`app/index.html`, vanilla JS, no build step; open it in Chrome).
+It composes an illustration **only from files in the user's own illustration library**,
+picked as local folders in the browser (SVG / AI / PDF / PNG / JPG). SVGs with named
+top-level groups are split into reusable parts; `.ai` files are rasterised with the
+vendored pdf.js in `app/vendor/`. The hard rule: never draw or generate artwork that is
+not in the loaded library. The library itself lives on the user's Mac and is not in
+this repo.
 
 ## Layout
 
 ```
 CLAUDE.md                              this file
 docs/roche-image-sources-tb-igra.md    catalogue of Roche image sources for the topic
+app/index.html                         OFC Illustrate Composer (static web app)
+app/vendor/                            pdf.js 3.11.174 (Apache-2.0), used to read .ai files
 skills-lock.json                       skill manifest (source + path + hash per skill)
 .agents/skills/<name>/                 installed skills (real files)
 .claude/skills/<name>                  symlinks into .agents/skills/
